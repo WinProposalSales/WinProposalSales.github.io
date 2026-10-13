@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WinProposals AI Toolkit – Write Better Proposals in Minutes</title>
+  <style>
+    :root {
+      --primary: #1a365d;
+      --secondary: #2c5282;
+      --accent: #3182ce;
+      --light: #ebf8ff;
+      --text: #2d3748;
+      --muted: #718096;
+      --success: #38a169;
+      --bg: #ffffff;
+      --gray-bg: #f7fafc;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      color: var(--text);
+      line-height: 1.6;
+      background: var(--bg);
+    }
+    .container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+    .wide { max-width: 1000px; margin: 0 auto; padding: 0 24px; }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(135deg, #1a365d 0%, #2c5282 100%);
+      color: white;
+      padding: 72px 0 64px;
+      text-align: center;
+    }
+    .hero h1 {
+      font-size: 2.4rem;
+      font-weight: 700;
+      line-height: 1.25;
+      margin-bottom: 16px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .hero .sub {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      max-width: 560px;
+      margin: 0 auto 32px;
+    }
+    .cta-btn {
+      display: inline-block;
+      background: #48bb78;
+      color: white;
+      font-weight: 600;
+      font-size: 1.1rem;
+      padding: 16px 36px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .cta-btn:hover { background: #38a169; transform: translateY(-1px); }
+    .cta-secondary {
+      display: inline-block;
+      margin-left: 12px;
+      color: rgba(255,255,255,0.85);
+      font-size: 0.95rem;
+      text-decoration: underline;
+    }
+
+    /* Sections */
+    section { padding: 56px 0; }
+    section.alt { background: var(--gray-bg); }
+    h2 {
+      font-size: 1.75rem;
+      color: var(--primary);
+      margin-bottom: 12px;
+      text-align: center;
+    }
+    .section-lead {
+      text-align: center;
+      color: var(--muted);
+      max-width: 560px;
+      margin: 0 auto 36px;
+      font-size: 1.05rem;
+    }
+
+    /* Problem */
+    .problem-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+    .problem-item {
+      background: white;
+      border-left: 4px solid #e53e3e;
+      padding: 16px 20px;
+      border-radius: 0 8px 8px 0;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    }
+    .problem-item strong { color: #c53030; }
+
+    /* Solution */
+    .solution-box {
+      background: var(--light);
+      border-radius: 12px;
+      padding: 32px;
+      max-width: 680px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .solution-box p { font-size: 1.1rem; }
+
+    /* Features */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 24px;
+      margin-top: 32px;
+    }
+    .feature {
+      background: white;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 24px;
+      text-align: left;
+    }
+    .feature h3 {
+      font-size: 1.05rem;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+    .feature p { font-size: 0.95rem; color: var(--muted); }
+
+    /* Pricing */
+    .pricing {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+      margin-top: 32px;
+    }
+    .price-card {
+      background: white;
+      border: 2px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 28px 24px;
+      text-align: center;
+      position: relative;
+    }
+    .price-card.featured {
+      border-color: var(--accent);
+      box-shadow: 0 8px 24px rgba(49,130,206,0.15);
+    }
+    .price-card.featured::before {
+      content: "Most Popular";
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--accent);
+      color: white;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 20px;
+    }
+    .price-card h3 { font-size: 1.2rem; color: var(--primary); margin-bottom: 8px; }
+    .price {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin: 12px 0;
+    }
+    .price span { font-size: 0.95rem; font-weight: 400; color: var(--muted); }
+    .price-card ul {
+      list-style: none;
+      text-align: left;
+      margin: 20px 0 24px;
+      font-size: 0.95rem;
+    }
+    .price-card li {
+      padding: 6px 0;
+      padding-left: 24px;
+      position: relative;
+    }
+    .price-card li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--success);
+      font-weight: 700;
+    }
+    .price-cta {
+      display: block;
+      width: 100%;
+      background: var(--primary);
+      color: white;
+      font-weight: 600;
+      padding: 12px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .price-cta:hover { background: var(--secondary); }
+    .price-card.featured .price-cta { background: var(--accent); }
+    .price-card.featured .price-cta:hover { background: #2b6cb0; }
+
+    /* FAQ */
+    .faq-item {
+      background: white;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 18px 20px;
+      margin-bottom: 12px;
+      max-width: 680px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .faq-item h4 {
+      font-size: 1.05rem;
+      color: var(--primary);
+      margin-bottom: 6px;
+    }
+    .faq-item p { font-size: 0.95rem; color: var(--muted); }
+
+    /* Final CTA */
+    .final-cta {
+      background: linear-gradient(135deg, #1a365d 0%, #2c5282 100%);
+      color: white;
+      text-align: center;
+      padding: 64px 24px;
+    }
+    .final-cta h2 { color: white; margin-bottom: 12px; }
+    .final-cta p { opacity: 0.9; margin-bottom: 28px; max-width: 480px; margin-left: auto; margin-right: auto; }
+
+    footer {
+      text-align: center;
+      padding: 32px 24px;
+      font-size: 0.85rem;
+      color: var(--muted);
+      background: var(--gray-bg);
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 1.8rem; }
+      .hero .sub { font-size: 1.05rem; }
+      .cta-secondary { display: block; margin: 16px 0 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="container">
+      <h1>Write Better Client Proposals in Minutes, Not Hours</h1>
+      <p class="sub">
+        The complete toolkit for agencies, consultants, and freelancers who are tired of spending half a day on every proposal.
+      </p>
+      <a href="#pricing" class="cta-btn">Get the Toolkit →</a>
+      <a href="#whats-included" class="cta-secondary">See what’s included</a>
+    </div>
+  </header>
+
+  <!-- PROBLEM -->
+  <section>
+    <div class="container">
+      <h2>Sound familiar?</h2>
+      <p class="section-lead">Most service businesses lose deals (and energy) because of how they write proposals.</p>
+      <div class="problem-grid">
+        <div class="problem-item">
+          <strong>4–8 hours per proposal</strong> — Your team is writing the same sections over and over instead of closing work.
+        </div>
+        <div class="problem-item">
+          <strong>Inconsistent quality</strong> — Some proposals look sharp. Others feel rushed. Clients notice.
+        </div>
+        <div class="problem-item">
+          <strong>Pricing by gut feel</strong> — You undercharge, over-deliver, or both. Margins suffer.
+        </div>
+        <div class="problem-item">
+          <strong>Slow turnaround loses deals</strong> — While you’re still drafting, the prospect is already talking to someone else.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOLUTION -->
+  <section class="alt">
+    <div class="container">
+      <h2>A better way exists</h2>
+      <div class="solution-box">
+        <p>
+          <strong>WinProposals AI Toolkit</strong> gives you a proven structure, a margin-protecting pricing calculator, and a simple AI-assisted draft generator so you can produce polished, client-ready proposals in a fraction of the time — without sacrificing quality or profitability.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT'S INCLUDED -->
+  <section id="whats-included">
+    <div class="wide">
+      <h2>What’s included</h2>
+      <p class="section-lead">Everything you need to start shipping better proposals this week.</p>
+      <div class="features">
+        <div class="feature">
+          <h3>Professional Proposal Template</h3>
+          <p>Outcome-focused Word template designed to convert. Clear phases, clean investment section, no fluff.</p>
+        </div>
+        <div class="feature">
+          <h3>Pricing & Scope Calculator</h3>
+          <p>Excel tool that protects your margins. Adjust hours, rate, profit margin, and risk buffer — get a recommended quote instantly.</p>
+        </div>
+        <div class="feature">
+          <h3>AI Draft Generator</h3>
+          <p>Simple Python script that turns a short client brief into a structured proposal outline in seconds.</p>
+        </div>
+        <div class="feature">
+          <h3>Usage Guide + Samples</h3>
+          <p>Clear instructions and a full sample so you (or your team) can start using the system the same day.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHO IT'S FOR -->
+  <section class="alt">
+    <div class="container">
+      <h2>Built for people who sell services</h2>
+      <p class="section-lead" style="margin-bottom: 16px;">
+        Marketing & creative agencies • Independent consultants • Freelance specialists • Small professional services firms
+      </p>
+      <p style="text-align:center; color: var(--muted); max-width: 560px; margin: 0 auto;">
+        If you write custom proposals more than a couple of times a month and still start from a blank page (or a messy old file), this was made for you.
+      </p>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing">
+    <div class="wide">
+      <h2>Simple pricing</h2>
+      <p class="section-lead">Start with the toolkit. Upgrade only if you want hands-on help.</p>
+      <div class="pricing">
+        <div class="price-card">
+          <h3>Digital Toolkit</h3>
+          <div class="price">$147 <span>one-time</span></div>
+          <ul>
+            <li>Proposal template (Word)</li>
+            <li>Pricing calculator (Excel)</li>
+            <li>AI draft generator script</li>
+            <li>Samples + full guide</li>
+            <li>Lifetime access to updates</li>
+          </ul>
+          <a href="#" class="price-cta">Get Instant Access</a>
+        </div>
+        <div class="price-card featured">
+          <h3>Done-for-You Setup</h3>
+          <div class="price">$3,500 <span>starting</span></div>
+          <ul>
+            <li>Everything in the Toolkit</li>
+            <li>Customized to your brand & services</li>
+            <li>Team training session</li>
+            <li>First 5 proposals reviewed</li>
+            <li>30-day support</li>
+          </ul>
+          <a href="#" class="price-cta">Book a Call</a>
+        </div>
+        <div class="price-card">
+          <h3>Ongoing Support</h3>
+          <div class="price">$750 <span>/month</span></div>
+          <ul>
+            <li>Async proposal feedback</li>
+            <li>New template packs as needed</li>
+            <li>Pricing reviews</li>
+            <li>Priority support</li>
+            <li>Cancel anytime</li>
+          </ul>
+          <a href="#" class="price-cta">Talk to Us</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="alt">
+    <div class="container">
+      <h2>Common questions</h2>
+      <div class="faq-item">
+        <h4>Do I need to know how to code?</h4>
+        <p>No. The Python script is optional and runs with a single command. Most people just use the Word template and Excel calculator.</p>
+      </div>
+      <div class="faq-item">
+        <h4>Will this work for my industry?</h4>
+        <p>The structure works for almost any service business that sells custom work (marketing, design, consulting, development, coaching, etc.). You simply swap in your own language and deliverables.</p>
+      </div>
+      <div class="faq-item">
+        <h4>How is this different from PandaDoc or Proposify?</h4>
+        <p>Those are powerful platforms. This is a lightweight system you own and control — faster to start, no monthly seat fees, and focused on the writing + pricing process rather than the entire document workflow.</p>
+      </div>
+      <div class="faq-item">
+        <h4>What if it doesn’t help?</h4>
+        <p>The digital toolkit comes with a simple 14-day satisfaction guarantee. If it’s not useful, just let us know.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <div class="final-cta">
+    <h2>Stop starting from a blank page</h2>
+    <p>Get the templates, calculator, and system that let you ship professional proposals without the usual time sink.</p>
+    <a href="#pricing" class="cta-btn">Get the Toolkit →</a>
+  </div>
+
+  <footer>
+    <p>WinProposals AI Toolkit • Built with real 2026 market research on proposal automation demand</p>
+    <p style="margin-top: 8px;">Questions? Reply to any email or reach out directly.</p>
+  </footer>
+
+</body>
+</html>
